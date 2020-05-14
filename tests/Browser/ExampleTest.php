@@ -8,6 +8,7 @@ use Tests\DuskTestCase;
 
 class ExampleTest extends DuskTestCase
 {
+    //use DatabaseMigrations;
     /**
      * A basic browser test example.
      *
@@ -17,7 +18,7 @@ class ExampleTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                    ->assertSee(trans('auth/general.login_prompt'));
+                ->assertTitleContains(config('app.name'));
         });
     }
 }
