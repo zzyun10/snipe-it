@@ -1,10 +1,10 @@
 <?php
 
-use App\Models\Company;
+use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
-$password = bcrypt('password');
 
-$factory->define(App\Models\User::class, function (Faker\Generator $faker) use ($password) {
+$factory->define(App\Models\User::class, function (Faker $faker)  {
     return [
         'activated' => 1,
         'address' => $faker->address,
@@ -12,7 +12,7 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) use (
         'company_id' => rand(1,4),
         'country' => $faker->country,
         'department_id' => rand(1,6),
-        'email' => $faker->safeEmail,
+        'email' => $faker->unique()->safeEmail,
         'employee_num' => $faker->numberBetween(3500, 35050),
         'first_name' => $faker->firstName,
         'jobtitle' => $faker->jobTitle,
@@ -20,12 +20,13 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) use (
         'locale' => $faker->locale,
         'location_id' => rand(1,5),
         'notes' => 'Created by DB seeder',
-        'password' => $password,
+        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'permissions' => '{"user":"0"}',
         'phone' => $faker->phoneNumber,
         'state' => $faker->stateAbbr,
         'username' => $faker->username,
-        'zip' => $faker->postcode
+        'zip' => $faker->postcode,
+        'remember_token' => Str::random(10),
     ];
 });
 
