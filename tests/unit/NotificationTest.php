@@ -1,35 +1,44 @@
 <?php
-use App\Exceptions\CheckoutNotAllowed;
-use App\Models\Asset;
-use App\Models\AssetModel;
-use App\Models\Category;
-use App\Models\Location;
+
+namespace Tests\Unit;
+
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 use App\Models\User;
+use App\Models\Category;
+use App\Models\AssetModel;
+use App\Models\Setting;
+use App\Models\Asset;
 use App\Notifications\CheckoutAssetNotification;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 
-class NotificationTest extends BaseTest
+class NotificationTest extends TestCase
 {
-    /**
-    * @var \UnitTester
-    */
-    protected $tester;
+    use RefreshDatabase;
 
-     public function testAUserIsEmailedIfTheyCheckoutAnAssetWithEULA()
-     {
-        $admin = factory(User::class)->states('superuser')->create();
-        Auth::login($admin);
-        $cat = $this->createValidCategory('asset-laptop-category', ['require_acceptance' => true]);
-        $model = $this->createValidAssetModel('mbp-13-model', ['category_id' => $cat->id]);
-        $asset = $this->createValidAsset(['model_id' => $model->id]);
-        $user = $this->createValidUser();
+
+    /**
+     * @test
+     */
+    public function it_sends_notifications_if_category_requires()
+    {
+
+        factory(Setting::class)->create( ['auto_increment_assets' => true]);
+
+        $category = factory(Category::class)
+            ->states('asset-laptop-category')->create( ['require_acceptance' => true]);
+
+        $model = factory(AssetModel::class)
+            ->states('mbp-13-model')->create(['category_id' => $category->id]);
+
+        $asset = factory(Asset::class)
+            ->create(['model_id' => $model->id]);
+
+        $user = factory(User::class)
+            ->create();
 
         Notification::fake();
         $asset->checkOut($user, 1);
         Notification::assertSentTo($user, CheckoutAssetNotification::class);
-     }
+    }
 }
