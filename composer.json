@@ -65,7 +65,6 @@
     "phpunit/php-code-coverage": "^7.0",
     "phpunit/php-token-stream": "^3.1",
     "phpunit/phpunit": "^8.5",
-    "squizlabs/php_codesniffer": "^3.5",
     "symfony/css-selector": "^4.4",
     "symfony/dom-crawler": "^4.4"
   },
