@@ -84,12 +84,18 @@
       "App\\": "app/",
       "Database\\Factories\\": "database/factories/",
       "Database\\Seeders\\": "database/seeds/"
-    }
+    },
+    "classmap": [
+      "database/"
+    ]
   },
   "autoload-dev": {
     "psr-4": {
       "Tests\\": "tests/"
-    }
+    },
+    "classmap": [
+      "database/"
+    ]
   },
   "scripts": {
     "post-autoload-dump": [
