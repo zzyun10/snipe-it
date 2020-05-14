@@ -1,15 +1,18 @@
 <?php
+use Faker\Generator as Faker;
+use App\Models\Accessory;
+
 
 /*
 |--------------------------------------------------------------------------
-| Asset Model Factories
+| Accessory Factories
 |--------------------------------------------------------------------------
 |
-| Factories related exclusively to creating models ..
+| Factories related exclusively to creating accessories
 |
 */
 
-$factory->define(App\Models\Accessory::class, function (Faker\Generator $faker) {
+$factory->define(Accessory::class, function (Faker $faker) {
     return [
         'user_id' => 1,
         'model_number' => $faker->numberBetween(1000000, 50000000),
@@ -17,7 +20,7 @@ $factory->define(App\Models\Accessory::class, function (Faker\Generator $faker) 
     ];
 });
 
-$factory->state(App\Models\Accessory::class, 'apple-bt-keyboard', function ($faker) {
+$factory->state(Accessory::class, 'apple-bt-keyboard', function ($faker) {
 
     return [
         'name' => 'Bluetooth Keyboard',
@@ -31,7 +34,7 @@ $factory->state(App\Models\Accessory::class, 'apple-bt-keyboard', function ($fak
 
 });
 
-$factory->state(App\Models\Accessory::class, 'apple-usb-keyboard', function ($faker) {
+$factory->state(Accessory::class, 'apple-usb-keyboard', function ($faker) {
 
     return [
         'name' => 'USB Keyboard',
@@ -45,7 +48,7 @@ $factory->state(App\Models\Accessory::class, 'apple-usb-keyboard', function ($fa
 
 });
 
-$factory->state(App\Models\Accessory::class, 'apple-mouse', function ($faker) {
+$factory->state(Accessory::class, 'apple-mouse', function ($faker) {
 
     return [
         'name' => 'Magic Mouse',
@@ -59,7 +62,7 @@ $factory->state(App\Models\Accessory::class, 'apple-mouse', function ($faker) {
 
 });
 
-$factory->state(App\Models\Accessory::class, 'microsoft-mouse', function ($faker) {
+$factory->state(Accessory::class, 'microsoft-mouse', function ($faker) {
 
     return [
         'name' => 'Sculpt Comfort Mouse',
