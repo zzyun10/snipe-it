@@ -1,16 +1,12 @@
 <?php
 
+namespace Tests\Unit;
 
+use PHPUnit\Framework\TestCase;
 use App\Models\SnipeModel;
 
-class SnipeModelTest extends BaseTest
+class SnipeModelTest extends TestCase
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
-    // tests
     /**
      * @test
      */
@@ -95,4 +91,5 @@ class SnipeModelTest extends BaseTest
         $c->manufacturer_id = '4';
         $this->assertTrue($c->manufacturer_id==4);
     }
+
 }
