@@ -1,25 +1,26 @@
 <?php
+
+namespace Tests\Unit;
+
+use PHPUnit\Framework\TestCase;
 use App\Models\CustomField;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 /*
  * Test strings for db column names  gathered from
  * http://www.omniglot.com/language/phrases/hovercraft.htm
  */
-class CustomFieldTest extends BaseTest
+
+class CustomFieldTest extends TestCase
 {
-    protected $tester;
 
-    public function testConstructor()
+    /**
+     * @test
+     */
+    public function Ip_format_does_something()
     {
-        $customfield = new CustomField();
-    }
+        // What is this really testing?
+        $this->markTestIncomplete();
 
-    public function testFormat()
-    {
         $customfield = factory(CustomField::class)->make(['format' => 'IP']);
         $values = [
             'name' => $customfield->name,
@@ -31,7 +32,12 @@ class CustomFieldTest extends BaseTest
         $this->assertEquals($customfield->format, "IP");
     }
 
-    public function testDbNameAscii()
+    /**
+     * ASCII text to slug
+     *
+     * @test
+     */
+    public function it_converts_ascii_names_to_db_safe_slug()
     {
         $customfield = new CustomField();
         $customfield->name = "My hovercraft is full of eels";
@@ -39,20 +45,28 @@ class CustomFieldTest extends BaseTest
         $this->assertEquals($customfield->convertUnicodeDbSlug(), "_snipeit_my_hovercraft_is_full_of_eels_1337");
     }
 
-    // Western Europe
-    public function testDbNameLatin()
+    /**
+     * Western Europe text to slug
+     *
+     * @test
+     */
+    public function it_converts_western_european_names_to_db_safe_slug()
     {
-        $customfield=new CustomField();
+        $customfield = new CustomField();
         $customfield->name="My hovercraft is full of eels";
         $customfield->id = 1337;
         $this->assertEquals($customfield->convertUnicodeDbSlug(), "_snipeit_my_hovercraft_is_full_of_eels_1337");
     }
 
 
-    // Asian
-    public function testDbNameChinese()
+    /**
+     * Chinese text to slug
+     *
+     * @test
+     */
+    public function it_converts_chinese_to_db_safe_slug()
     {
-        $customfield=new CustomField();
+        $customfield = new CustomField();
         $customfield->name="我的氣墊船裝滿了鱔魚";
         $customfield->id = 1337;
         if (function_exists('transliterator_transliterate')) {
@@ -62,9 +76,14 @@ class CustomFieldTest extends BaseTest
         }
     }
 
-    public function testDbNameJapanese()
+    /**
+     * Japanese text to slug
+     *
+     * @test
+     */
+    public function it_converts_japanese_to_db_safe_slug()
     {
-        $customfield=new CustomField();
+        $customfield = new CustomField();
         $customfield->name="私のホバークラフトは鰻でいっぱいです";
         $customfield->id = 1337;
         if (function_exists('transliterator_transliterate')) {
@@ -74,7 +93,12 @@ class CustomFieldTest extends BaseTest
         }
     }
 
-    public function testDbNameKorean()
+    /**
+     * Korean text to slug
+     *
+     * @test
+     */
+    public function it_converts_korean_to_db_safe_slug()
     {
         $customfield = new CustomField();
         $customfield->name = "내 호버크라프트는 장어로 가득 차 있어요";
@@ -87,8 +111,12 @@ class CustomFieldTest extends BaseTest
 
     }
 
-    // Nordic languages
-    public function testDbNameNonLatinEuro()
+    /**
+     * Non-Latin Euro text to slug
+     *
+     * @test
+     */
+    public function it_converts_nordic_to_db_safe_slug()
     {
         $customfield = new CustomField();
         $customfield->name = "Mój poduszkowiec jest pełen węgorzy";
@@ -100,8 +128,12 @@ class CustomFieldTest extends BaseTest
         }
     }
 
-    //
-    public function testDbNameTurkish()
+    /**
+     * Turkish text to slug
+     *
+     * @test
+     */
+    public function it_converts_turkish_to_db_safe_slug()
     {
         $customfield = new CustomField();
         $customfield->name = "Hoverkraftım yılan balığı dolu";
@@ -113,9 +145,14 @@ class CustomFieldTest extends BaseTest
         }
     }
 
-    public function testDbNameArabic()
+    /**
+     * Arabic text to slug
+     *
+     * @test
+     */
+    public function it_converts_arabic_to_db_safe_slug()
     {
-        $customfield=new CustomField();
+        $customfield = new CustomField();
         $customfield->name="حَوّامتي مُمْتِلئة بِأَنْقَلَيْسون";
         $customfield->id = 1337;
         if (function_exists('transliterator_transliterate')) {

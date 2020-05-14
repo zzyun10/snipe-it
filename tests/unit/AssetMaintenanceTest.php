@@ -1,15 +1,13 @@
 <?php
 
+namespace Tests\Unit;
 
+use PHPUnit\Framework\TestCase;
 use App\Models\AssetMaintenance;
+use Carbon\Carbon;
 
-class AssetMaintenanceTest extends BaseTest
+class AssetMaintenanceTest extends TestCase
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
     /**
      * @test
      */
@@ -43,7 +41,7 @@ class AssetMaintenanceTest extends BaseTest
     {
         $c = new AssetMaintenance;
         $c->notes = '';
-        $this->assertTrue($c->notes === null);
+        $this->assertNull($c->notes);
         $c->notes = 'This is a long note';
         $this->assertTrue($c->notes==='This is a long note');
     }
@@ -55,9 +53,9 @@ class AssetMaintenanceTest extends BaseTest
     {
         $c = new AssetMaintenance;
         $c->completion_date = '';
-        $this->assertTrue($c->completion_date === null);
+        $this->assertNull($c->completion_date);
         $c->completion_date = '0000-00-00';
-        $this->assertTrue($c->completion_date===null);
+        $this->assertNull($c->completion_date);
         $c->completion_date = '2017-05-12';
         $this->assertTrue($c->completion_date==Carbon::parse('2017-05-12'));
 
