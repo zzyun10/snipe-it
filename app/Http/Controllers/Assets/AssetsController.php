@@ -68,7 +68,7 @@ class AssetsController extends Controller
         } else {
             $company = null;
         }
-        return view('hardware/index')->with('company', $company);
+        return view('hardware.index')->with('company', $company);
     }
 
     /**
