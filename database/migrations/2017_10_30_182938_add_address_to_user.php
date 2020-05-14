@@ -29,10 +29,7 @@ class AddAddressToUser extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('address');
-            $table->dropColumn('city');
-            $table->dropColumn('state');
-            $table->dropColumn('zip');
+            $table->dropColumn('address', 'city', 'state', 'zip');
 
         });
     }

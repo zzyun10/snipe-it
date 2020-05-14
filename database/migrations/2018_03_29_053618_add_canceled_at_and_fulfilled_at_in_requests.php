@@ -28,9 +28,7 @@ class AddCanceledAtAndFulfilledAtInRequests extends Migration
     public function down()
     {
         Schema::table('checkout_requests', function (Blueprint $table) {
-            $table->dropColumn('canceled_at');
-            $table->dropColumn('fulfilled_at');
-            $table->dropColumn('deleted_at');
+            $table->dropColumn('canceled_at', 'fulfilled_at', 'deleted_at');
         });
     }
 }

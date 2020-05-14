@@ -34,14 +34,7 @@ class AddSamlFieldsToSettings extends Migration {
 	{
 		Schema::table('settings', function(Blueprint $table)
 		{
-			$table->dropColumn('saml_enabled');
-			$table->dropColumn('saml_idp_metadata');
-			$table->dropColumn('saml_attr_mapping_username');
-			$table->dropColumn('saml_forcelogin');
-			$table->dropColumn('saml_slo');
-			$table->dropColumn('saml_sp_x509cert');
-			$table->dropColumn('saml_sp_privatekey');
-			$table->dropColumn('saml_custom_settings');
+			$table->dropColumn('saml_enabled', 'saml_idp_metadata', 'saml_attr_mapping_username', 'saml_forcelogin', 'saml_slo', 'saml_sp_x509cert','saml_sp_privatekey', 'saml_custom_settings');
 		});
 	}
 

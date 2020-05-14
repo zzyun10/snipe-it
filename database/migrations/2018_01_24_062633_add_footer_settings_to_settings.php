@@ -27,8 +27,7 @@ class AddFooterSettingsToSettings extends Migration
     public function down()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->dropColumn('support_footer');
-            $table->dropColumn('footer_text');
+            $table->dropColumn('support_footer', 'footer_text');
         });
     }
 }

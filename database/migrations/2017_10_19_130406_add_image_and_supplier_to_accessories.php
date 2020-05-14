@@ -27,8 +27,7 @@ class AddImageAndSupplierToAccessories extends Migration
     public function down()
     {
         Schema::table('accessories', function (Blueprint $table) {
-            $table->dropColumn('image');
-            $table->dropColumn('supplier_id');
+            $table->dropColumn('image', 'supplier_id');
         });
     }
 }
