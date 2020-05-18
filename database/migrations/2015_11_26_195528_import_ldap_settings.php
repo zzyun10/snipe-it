@@ -66,11 +66,11 @@ class ImportLdapSettings extends Migration {
 	{
 
     if (@copy(app_path().'/config/'.app()->environment().'/deprecated.ldap.php', app_path().'/config/'.app()->environment().'/ldap.php')) {
-      echo 'Un-archived LDAP config file'."\n";
+      // 'Un-archived LDAP config file'."\n";
       @unlink(app_path().'/config/'.app()->environment().'/deprecated.ldap.php');
 
     } else {
-      echo 'Could not un-archive LDAP config file. Manually rename it instead.'."\n";
+      // 'Could not un-archive LDAP config file. Manually rename it instead.'."\n";
     }
 	}
 
