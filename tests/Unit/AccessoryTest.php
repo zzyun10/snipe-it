@@ -56,36 +56,7 @@ class AccessoryTest extends TestCase
             ->create(['location_id' => factory(Location::class)->create()->id]);
         $this->assertInstanceOf(Location::class, $accessory->location);
     }
-
-    /**
-     * @test
-     */
-    public function testAnAccessoryBelongsToACategory()
-    {
-        $accessory = factory(Accessory::class)->states('apple-bt-keyboard')
-            ->create(['category_id' => factory(Category::class)->states('accessory-keyboard-category')->create(['category_type' => 'accessory'])->id]);
-        $this->assertInstanceOf(Category::class, $accessory->category);
-        $this->assertEquals('accessory', $accessory->category->category_type);
-    }
-
-    /**
-     * @test
-     */
-    public function testCategoryIdMustExist()
-    {
-        $category = $this->createValidCategory('accessory-keyboard-category', ['category_type' => 'accessory']);
-        $accessory = factory(Accessory::class)->states('apple-bt-keyboard')->make(['category_id' => $category->id]);
-        $this->createValidManufacturer('apple');
-
-        $accessory->save();
-        $this->assertTrue($accessory->isValid());
-        $newId = $category->id + 1;
-        $accessory = factory(Accessory::class)->states('apple-bt-keyboard')->make(['category_id' => $newId]);
-        $accessory->save();
-
-        $this->assertFalse($accessory->isValid());
-        $this->assertStringContainsString("The selected category id is invalid.", $accessory->getErrors()->get('category_id')[0]);
-    }
+    
 
 
 
